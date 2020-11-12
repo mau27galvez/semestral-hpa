@@ -14,31 +14,28 @@ información del auto y del docente; además, tener en cuenta un reporte de vent
 #define SUV_PRICE 15
 #define OFF_ROAD_PRICE 15
 
-struct
+typedef struct
 {
     char type[100];
     char id[100];
     int color;
-} car;
+} CAR;
 
-struct
+typedef struct
 {
     char name[100];
     int id;
     int Faculty;
-} profesor;
-
-struct
+} PROFESSOR;
+typedef struct
 {
     int id;
     int car_id;
     int profesor_id;
-} parking_slot;
-
+} PARKING_SLOT;
 
 int main()
 {
-    
 
     return 0;
 }
