@@ -8,11 +8,21 @@ información del auto y del docente; además, tener en cuenta un reporte de vent
 (Funcionamiento para un semestre).
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #define PARKING_SLOTS 100
 #define HATCHBACK_PRICE 15
 #define SEDAN_PRICE 15
 #define SUV_PRICE 15
 #define OFF_ROAD_PRICE 15
+
+#define CAR_TABLE "cars.csv"
+#define PROFESSOR_TABLE "professors.csv"
+#define PARKING_SLOT_TABLE "parking-slots.csv"
+
+typedef char CSVDATA[500];
 
 typedef struct
 {
@@ -41,6 +51,26 @@ int InsertParkingSlot( PARKING_SLOT parking_slot );
 
 int main()
 {
+
+    return 0;
+}
+
+int InsertCar( CAR car )
+{
+    FILE *out = fopen( CAR_TABLE, "r" );
+    CSVDATA input;
+
+    if ( !(out = fopen( CAR_TABLE, "w" )) ) {
+        printf("No se puede escribir en el archivo %s\n", CAR_TABLE);
+
+        return -1;
+    }
+
+    fputs(input, out);
+    fputs("\n", out);
+    printf("Registro guardado!\n");
+
+    fclose(out);
 
     return 0;
 }
