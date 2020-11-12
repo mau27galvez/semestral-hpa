@@ -27,12 +27,17 @@ typedef struct
     int id;
     int Faculty;
 } PROFESSOR;
+
 typedef struct
 {
     int id;
     int car_id;
     int profesor_id;
 } PARKING_SLOT;
+
+int InsertCar( CAR car );
+int InsertProfessor( PROFESSOR professor );
+int InsertParkingSlot( PARKING_SLOT parking_slot );
 
 int main()
 {
