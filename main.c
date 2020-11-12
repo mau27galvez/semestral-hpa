@@ -45,6 +45,9 @@ typedef struct
     int profesor_id;
 } PARKING_SLOT;
 
+char FormatCarToCSV();
+char FormatProfessorToCSV();
+char FormatParkingSlotToCSV();
 int InsertCar( CAR car );
 int InsertProfessor( PROFESSOR professor );
 int InsertParkingSlot( PARKING_SLOT parking_slot );
