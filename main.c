@@ -14,6 +14,26 @@ información del auto y del docente; además, tener en cuenta un reporte de vent
 #define SUV_PRICE 15
 #define OFF_ROAD_PRICE 15
 
+struct
+{
+    char type[100];
+    char id[100];
+    int color;
+} car;
+
+struct
+{
+    char name[100];
+    int id;
+    int Faculty;
+} profesor;
+
+struct
+{
+    int id;
+    int car_id;
+    int profesor_id;
+} parking_slot;
 
 
 int main()
