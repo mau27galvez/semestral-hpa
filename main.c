@@ -33,9 +33,9 @@ typedef struct
 
 typedef struct
 {
+    char id[50];
     char name[100];
-    int id;
-    int Faculty;
+    char faculty[50];
 } PROFESSOR;
 
 typedef struct
@@ -51,8 +51,7 @@ int InsertParkingSlot( PARKING_SLOT parking_slot );
 
 int main()
 {
-    CAR car = {"1","SUV","red"};
-    InsertCar( car );
+
 
     return 0;
 }
@@ -61,13 +60,51 @@ int InsertCar( CAR car )
 {
     FILE *out = fopen( CAR_TABLE, "r" );
 
-    if ( !(out = fopen( CAR_TABLE, "w" )) ) {
+    if ( !(out = fopen( CAR_TABLE, "a" )) ) {
         printf("No se puede escribir en el archivo %s\n", CAR_TABLE);
 
         return -1;
     }
 
     fprintf(out, "%s,%s,%s", car.id, car.type, car.color);
+    fputs("\n", out);
+    printf("Registro guardado!\n");
+
+    fclose(out);
+
+    return 0;
+}
+
+int InsertProfessor( PROFESSOR professor )
+{
+    FILE *out = fopen( PROFESSOR_TABLE, "r" );
+
+    if ( !(out = fopen( PROFESSOR_TABLE, "a" )) ) {
+        printf("No se puede escribir en el archivo %s\n", PROFESSOR_TABLE);
+
+        return -1;
+    }
+
+    fprintf(out, "%s,%s,%s", professor.id, professor.name, professor.faculty);
+    fputs("\n", out);
+    printf("Registro guardado!\n");
+
+    fclose(out);
+
+    return 0;
+}
+
+int InsertParkingSlot( PARKING_SLOT parking_slot )
+{
+    FILE *out = fopen( PARKING_SLOT_TABLE, "r" );
+
+    if ( !(out = fopen( PARKING_SLOT_TABLE, "a" )) ) {
+        printf("No se puede escribir en el archivo %s\n", PARKING_SLOT_TABLE);
+
+        return -1;
+    }
+
+    fprintf(out, "%d,%d,%d", parking_slot.id, parking_slot.car_id, parking_slot.profesor_id);
     fputs("\n", out);
     printf("Registro guardado!\n");
 
