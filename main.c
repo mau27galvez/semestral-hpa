@@ -26,9 +26,9 @@ typedef char CSVDATA[500];
 
 typedef struct
 {
-    char type[100];
-    char id[100];
-    int color;
+    char id[50];
+    char type[50];
+    char color[50];
 } CAR;
 
 typedef struct
@@ -45,15 +45,14 @@ typedef struct
     int profesor_id;
 } PARKING_SLOT;
 
-char FormatCarToCSV();
-char FormatProfessorToCSV();
-char FormatParkingSlotToCSV();
 int InsertCar( CAR car );
 int InsertProfessor( PROFESSOR professor );
 int InsertParkingSlot( PARKING_SLOT parking_slot );
 
 int main()
 {
+    CAR car = {"1","SUV","red"};
+    InsertCar( car );
 
     return 0;
 }
@@ -61,7 +60,6 @@ int main()
 int InsertCar( CAR car )
 {
     FILE *out = fopen( CAR_TABLE, "r" );
-    CSVDATA input;
 
     if ( !(out = fopen( CAR_TABLE, "w" )) ) {
         printf("No se puede escribir en el archivo %s\n", CAR_TABLE);
@@ -69,7 +67,7 @@ int InsertCar( CAR car )
         return -1;
     }
 
-    fputs(input, out);
+    fprintf(out, "%s,%s,%s", car.id, car.type, car.color);
     fputs("\n", out);
     printf("Registro guardado!\n");
 
