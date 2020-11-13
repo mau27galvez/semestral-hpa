@@ -129,7 +129,7 @@ CAR *GetCar()
 
     while ( fgets( row, 500, out ) != NULL ) {
         printf("%s", row);
-        int collumn = 0;
+        int column = 0;
 
         if ( !cars ) {
             cars = malloc( sizeof( CAR ) );
@@ -140,7 +140,7 @@ CAR *GetCar()
             {
                 printf("%s\n", ptr);
 
-                switch ( collumn ) {
+                switch ( column ) {
                     case 1:
                         strcpy( cars[ carsListSize ].id, ptr );
                         break;
@@ -153,7 +153,7 @@ CAR *GetCar()
                 }
 
                 ptr = strtok(NULL, delim);
-                collumn++;
+                column++;
             }
         } else {
             cars = realloc( cars, sizeof( CAR ) * ( carsListSize + 1 ) );
@@ -164,7 +164,7 @@ CAR *GetCar()
             {
                 printf("%s\n", ptr);
 
-                switch ( collumn ) {
+                switch ( column ) {
                     case 1:
                         strcpy( cars[ carsListSize ].id, ptr );
                         break;
@@ -177,7 +177,7 @@ CAR *GetCar()
                 }
 
                 ptr = strtok(NULL, delim);
-                collumn++;
+                column++;
             }
         }
 
