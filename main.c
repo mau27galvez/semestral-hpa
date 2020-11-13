@@ -40,9 +40,9 @@ typedef struct
 
 typedef struct
 {
-    int id;
-    int car_id;
-    int profesor_id;
+    char id[50];
+    char car_id[50];
+    char profesor_id[50];
 } PARKING_SLOT;
 
 int InsertCar( CAR car );
@@ -50,13 +50,17 @@ int InsertProfessor( PROFESSOR professor );
 int InsertParkingSlot( PARKING_SLOT parking_slot );
 
 CAR *GetCar();
-char GetProfessor();
-char GetParkingSlot();
+PROFESSOR *GetProfessor();
+PARKING_SLOT *GetParkingSlot();
 
 int main()
 {
     CAR *cars = GetCar();
-    printf("%s", cars[1].color);
+    PROFESSOR *professors = GetProfessor();
+    PARKING_SLOT *parking_slots = GetParkingSlot();
+    printf("%s\n", cars[0].type);
+    printf("%s\n", professors[0].name);
+    printf("%s\n", parking_slots[0].id);
 
     return 0;
 }
@@ -109,7 +113,7 @@ int InsertParkingSlot( PARKING_SLOT parking_slot )
         return -1;
     }
 
-    fprintf(out, "%d,%d,%d", parking_slot.id, parking_slot.car_id, parking_slot.profesor_id);
+    fprintf(out, "%s,%s,%s", parking_slot.id, parking_slot.car_id, parking_slot.profesor_id);
     fputs("\n", out);
     printf("Registro guardado!\n");
 
@@ -179,4 +183,130 @@ CAR *GetCar()
     }
 
     return cars;
+}
+
+PROFESSOR *GetProfessor()
+{
+    FILE *out = fopen( PROFESSOR_TABLE, "r" );
+    char row[500];
+    PROFESSOR *professors = NULL;
+    char *delim = ",";
+    int professorsListSize = 0;
+
+    while ( fgets( row, 500, out ) != NULL ) {
+        int column = 1;
+
+        if ( !professors ) {
+            professors = malloc( sizeof( PROFESSOR ) );
+
+            char *ptr = strtok(row, delim);
+
+            while( ptr != NULL )
+            {
+                switch ( column ) {
+                    case 1:
+                        strcpy( professors[ professorsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( professors[ professorsListSize ].name, ptr );
+                        break;
+                    case 3:
+                        strcpy( professors[ professorsListSize ].faculty, ptr );
+                        break;
+                }
+
+                ptr = strtok(NULL, delim);
+                column++;
+            }
+        } else {
+            professors = realloc( professors, sizeof( PROFESSOR ) * ( professorsListSize + 1 ) );
+
+            char *ptr = strtok(row, delim);
+
+            while( ptr != NULL )
+            {
+                switch ( column ) {
+                    case 1:
+                        strcpy( professors[ professorsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( professors[ professorsListSize ].name, ptr );
+                        break;
+                    case 3:
+                        strcpy( professors[ professorsListSize ].faculty, ptr );
+                        break;
+                }
+
+                ptr = strtok(NULL, delim);
+                column++;
+            }
+        }
+
+        professorsListSize++;
+    }
+
+    return professors;
+}
+
+PARKING_SLOT *GetParkingSlot()
+{
+    FILE *out = fopen( PROFESSOR_TABLE, "r" );
+    char row[500];
+    PARKING_SLOT *parking_slots = NULL;
+    char *delim = ",";
+    int parking_slotsListSize = 0;
+
+    while ( fgets( row, 500, out ) != NULL ) {
+        int column = 1;
+
+        if ( !parking_slots ) {
+            parking_slots = malloc( sizeof( PROFESSOR ) );
+
+            char *ptr = strtok(row, delim);
+
+            while( ptr != NULL )
+            {
+                switch ( column ) {
+                    case 1:
+                        strcpy( parking_slots[ parking_slotsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( parking_slots[ parking_slotsListSize ].car_id, ptr );
+                        break;
+                    case 3:
+                        strcpy( parking_slots[ parking_slotsListSize ].profesor_id, ptr );
+                        break;
+                }
+
+                ptr = strtok(NULL, delim);
+                column++;
+            }
+        } else {
+            parking_slots = realloc( parking_slots, sizeof( PROFESSOR ) * ( parking_slotsListSize + 1 ) );
+
+           char *ptr = strtok(row, delim);
+
+            while( ptr != NULL )
+            {
+                switch ( column ) {
+                    case 1:
+                        strcpy( parking_slots[ parking_slotsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( parking_slots[ parking_slotsListSize ].car_id, ptr );
+                        break;
+                    case 3:
+                        strcpy( parking_slots[ parking_slotsListSize ].profesor_id, ptr );
+                        break;
+                }
+
+                ptr = strtok(NULL, delim);
+                column++;
+            }
+        }
+
+        parking_slotsListSize++;
+    }
+
+    return parking_slots;
 }
