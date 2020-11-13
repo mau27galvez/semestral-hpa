@@ -49,13 +49,16 @@ int InsertCar( CAR car );
 int InsertProfessor( PROFESSOR professor );
 int InsertParkingSlot( PARKING_SLOT parking_slot );
 
-char GetCar();
+CAR *GetCar();
 char GetProfessor();
 char GetParkingSlot();
 
 int main()
 {
     GetCar();
+    // CAR *cars = GetCar();
+    // printf("%s", cars[0].id);
+
     return 0;
 }
 
@@ -116,10 +119,9 @@ int InsertParkingSlot( PARKING_SLOT parking_slot )
     return 0;
 }
 
-char GetCar()
+CAR *GetCar()
 {
     FILE *out = fopen( CAR_TABLE, "r" );
-    const char* tok;
     char row[500];
     CAR *cars = NULL;
     char *delim = ",";
@@ -127,29 +129,59 @@ char GetCar()
 
     while ( fgets( row, 500, out ) != NULL ) {
         printf("%s", row);
+        int collumn = 0;
 
         if ( !cars ) {
             cars = malloc( sizeof( CAR ) );
 
             char *ptr = strtok(row, delim);
 
-            while(ptr != NULL)
+            while( ptr != NULL )
             {
-                printf("'%s'\n", ptr);
+                printf("%s\n", ptr);
                 ptr = strtok(NULL, delim);
+
+                switch ( collumn ) {
+                    case 1:
+                        strcpy( cars[ carsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( cars[ carsListSize ].type, ptr );
+                        break;
+                    case 3:
+                        strcpy( cars[ carsListSize ].color, ptr );
+                        break;
+                }
+                collumn++;
             }
         } else {
             cars = realloc( cars, sizeof( CAR ) * ( carsListSize + 1 ) );
 
             char *ptr = strtok(row, delim);
 
-            while(ptr != NULL)
+            while( ptr != NULL )
             {
                 printf("%s\n", ptr);
                 ptr = strtok(NULL, delim);
+
+                switch ( collumn ) {
+                    case 1:
+                        strcpy( cars[ carsListSize ].id, ptr );
+                        break;
+                    case 2:
+                        strcpy( cars[ carsListSize ].type, ptr );
+                        break;
+                    case 3:
+                        strcpy( cars[ carsListSize ].color, ptr );
+                        break;
+                }
+                collumn++;
             }
         }
+
+        carsListSize++;
     }
 
-    return 'a';
+    printf("%p", cars);
+    return cars;
 }
