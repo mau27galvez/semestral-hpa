@@ -55,9 +55,8 @@ char GetParkingSlot();
 
 int main()
 {
-    GetCar();
-    // CAR *cars = GetCar();
-    // printf("%s", cars[0].id);
+    CAR *cars = GetCar();
+    printf("%s", cars[1].color);
 
     return 0;
 }
@@ -128,8 +127,7 @@ CAR *GetCar()
     int carsListSize = 0;
 
     while ( fgets( row, 500, out ) != NULL ) {
-        printf("%s", row);
-        int column = 0;
+        int column = 1;
 
         if ( !cars ) {
             cars = malloc( sizeof( CAR ) );
@@ -138,8 +136,6 @@ CAR *GetCar()
 
             while( ptr != NULL )
             {
-                printf("%s\n", ptr);
-
                 switch ( column ) {
                     case 1:
                         strcpy( cars[ carsListSize ].id, ptr );
@@ -162,8 +158,6 @@ CAR *GetCar()
 
             while( ptr != NULL )
             {
-                printf("%s\n", ptr);
-
                 switch ( column ) {
                     case 1:
                         strcpy( cars[ carsListSize ].id, ptr );
@@ -184,6 +178,5 @@ CAR *GetCar()
         carsListSize++;
     }
 
-    printf("%p", cars);
     return cars;
 }
