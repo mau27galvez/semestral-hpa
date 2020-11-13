@@ -49,10 +49,13 @@ int InsertCar( CAR car );
 int InsertProfessor( PROFESSOR professor );
 int InsertParkingSlot( PARKING_SLOT parking_slot );
 
+char GetCar();
+char GetProfessor();
+char GetParkingSlot();
+
 int main()
 {
-
-
+    GetCar();
     return 0;
 }
 
@@ -111,4 +114,42 @@ int InsertParkingSlot( PARKING_SLOT parking_slot )
     fclose(out);
 
     return 0;
+}
+
+char GetCar()
+{
+    FILE *out = fopen( CAR_TABLE, "r" );
+    const char* tok;
+    char row[500];
+    CAR *cars = NULL;
+    char *delim = ",";
+    int carsListSize = 0;
+
+    while ( fgets( row, 500, out ) != NULL ) {
+        printf("%s", row);
+
+        if ( !cars ) {
+            cars = malloc( sizeof( CAR ) );
+
+            char *ptr = strtok(row, delim);
+
+            while(ptr != NULL)
+            {
+                printf("'%s'\n", ptr);
+                ptr = strtok(NULL, delim);
+            }
+        } else {
+            cars = realloc( cars, sizeof( CAR ) * ( carsListSize + 1 ) );
+
+            char *ptr = strtok(row, delim);
+
+            while(ptr != NULL)
+            {
+                printf("%s\n", ptr);
+                ptr = strtok(NULL, delim);
+            }
+        }
+    }
+
+    return 'a';
 }
