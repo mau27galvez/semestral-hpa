@@ -139,7 +139,6 @@ CAR *GetCar()
             while( ptr != NULL )
             {
                 printf("%s\n", ptr);
-                ptr = strtok(NULL, delim);
 
                 switch ( collumn ) {
                     case 1:
@@ -152,6 +151,8 @@ CAR *GetCar()
                         strcpy( cars[ carsListSize ].color, ptr );
                         break;
                 }
+
+                ptr = strtok(NULL, delim);
                 collumn++;
             }
         } else {
@@ -162,7 +163,6 @@ CAR *GetCar()
             while( ptr != NULL )
             {
                 printf("%s\n", ptr);
-                ptr = strtok(NULL, delim);
 
                 switch ( collumn ) {
                     case 1:
@@ -175,6 +175,8 @@ CAR *GetCar()
                         strcpy( cars[ carsListSize ].color, ptr );
                         break;
                 }
+
+                ptr = strtok(NULL, delim);
                 collumn++;
             }
         }
